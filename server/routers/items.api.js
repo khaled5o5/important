@@ -5,13 +5,20 @@ const items = []
 
 
 
-router.get('/getItem', (req,res) => res.send(items)) 
+router.get('/getItem', async (req,res) => {
+    const items = await Item.find({});
+    res.send (items);
+}); 
+
+
 
 router.post('/addNewItem', async function (req, res){
     const item = new Item (req.body) 
+    console.log(req.body);
    const response = await item.save(); 
+
     
 
-    res.send('item recived')
+    res.send(response)
 })
 module.exports = router   
